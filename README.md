@@ -5,7 +5,7 @@ Esso utilizza i semafori come meccanismo di sincronizzazione tra i processi. Il 
 
  - ## Classe Artista
 
-      La classe Artista gestisce le sedie disponibili attraverso l'implementazione di un semaforo e um tempo massimo di attesa. Inoltre si occupa anche di rappresentare l'artista che esegue un ritratto. L'Artista forniscee i seguenti metodi: 
+      La classe Artista gestisce le sedie disponibili attraverso l'implementazione di un semaforo e um tempo massimo di attesa. Inoltre si occupa anche di rappresentare l'artista che esegue un ritratto. L'Artista fornisce i seguenti metodi: 
     - occupaSedia -> per occupare una sedia;
     - liberaSedia -> per liberare una sedia;
     - eseguiRitratto -> per eseguire il ritratto.
@@ -130,6 +130,44 @@ public class Sedia {
     La classe Demo contiene il Main che a sua volta rappresenta la classe principale del programma. All'interno del metodo "main", viene istanziato un oggetto di tipo "Artista" con un numero predefinito di sedie e un tempo massimo di attesa per le stesse.
       
     Esempio del codice:
+
+```
+package myPackage;
+
+/*
+ * Classe principale per eseguire il programma artista da strada
+ * @author Fruch Mauro 4CIA
+ */
+
+public class Demo {
+	
+	public static void main(String[] args) {
+		int numSedie = 4;         						//numero di sedie disponibili
+		int tMax = 5000;						        //tempo massimo di attesa per una sedia					
+		int numClienti = 10;							//numero di clienti che arrivano
+	
+		Artista a = new Artista(numSedie, tMax);
+	
+		for(int i = 0; i <= numClienti; i++) {
+			Cliente c = new Cliente(i,a);
+			Thread tC = new Thread(c);					//Thread del cliente
+			tC.start();	
+		
+			try {
+				Thread.sleep(2000);					//Intervallo di tempo tra l'arrivo di un cliente e l'altro
+			}catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+```
+
+- ## Considerazioni aggiuntive
+
+-> Vengono creati un certo numero di oggetti "Cliente" e per ognuno di essi viene creato un thread separato. I clienti vengono generati a intervalli casuali.
+
+-> Ogni thread del cliente esegue il metodo "run()", che rappresenta il comportamento del cliente. Il cliente si avvicina all'artista, cerca di occupare una sedia tramite il metodo "occupaSedia" dell'artista. Se riesce a ottenere una sedia, si siede e fa eseguire il ritratto tramite il metodo "eseguiRitratto()". Alla fine, il cliente libera la sedia attraverso il metodo "liberaSedia()". Se un non riesce ad occupare una sedie entro un certo tempo massimo di attesa, esso rinuncia il ritratto.
     
     
 
