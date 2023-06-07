@@ -99,10 +99,39 @@ public class Cliente implements Runnable{
 
 - ## Classe Sedia
 
-      La classe Sedia rappresenta una sedia disponibile per i clienti. Ha un identificatore "id" che permette di distingure le sedie tra loro.
+    La classe Sedia rappresenta una sedia disponibile per i clienti. Ha un identificatore "id" che permette di distingure le sedie tra loro.
       
-      Esempio del codice:
+    Esempio del codice:
+
+```package myPackage;
+
+//Classe per rappresentare una sedia
+
+public class Sedia {
+	private int id;
+	
+	public Sedia(int i) {
+		setId(i);
+	}
+	
+	public void setId(int s) {
+		this.id = s;
+	}
+	
+	public int getId() {
+		return id;
+	}
+}
+```
+
+
+- ## Classe Demo
+
+    La classe Demo contiene il Main che a sua volta rappresenta la classe principale del programma. All'interno del metodo "main", viene istanziato un oggetto di tipo "Artista" con un numero predefinito di sedie e un tempo massimo di attesa per le stesse.
       
+    Esempio del codice:
+    
+    
 
 		
 		
