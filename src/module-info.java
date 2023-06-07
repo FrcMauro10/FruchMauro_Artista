@@ -1,0 +1,2 @@
+module FruchMauro_Artista {
+}
