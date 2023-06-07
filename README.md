@@ -46,7 +46,7 @@ class Artista{
 	
 	public void eseguiRitratto(Cliente c) {										//Metodo per eseguire un ritratto
 		Random rand = new Random();
-		int t = rand.nextInt(5000) + 1000;										//Imposto il tempo del ritratto tra 1 e 6 secondi
+		int t = rand.nextInt(5000) + 1000;									//Imposto il tempo del ritratto tra 1 e 6 secondi
 		try {
 			Thread.sleep(t);
 		} catch (InterruptedException e) {
@@ -57,12 +57,55 @@ class Artista{
 }
 ```
 
+
  - ## Classe Cliente
 
       La classe Cliente implementa l'interfaccia Runnable e rappresenta un cliente che desidera fare un ritratto. Ogni cliente ha un identificatore "id" e una referenza all'oggetto "Artista".
       
       Esempio del codie:
       
+```package myPackage;
+
+//Classe per rappresentare un cliente
+
+public class Cliente implements Runnable{
+	
+	private int id;
+	private Artista a;
+	
+	//Costruttore
+	
+	public Cliente(int i, Artista art) {                     
+		this.id = i;
+		this.a = art;
+	}
+	
+	public void run(){
+		System.out.println("Cliente " + id  + " si avvicina all'artista. ");
+		
+		if(a.occupaSedia(this)) {                                                  			//Se ci sono sedie disponibili, il cliente occuppa una sedia
+			System.out.println("Cliente " + id + " si sedie sulla sedia. ");
+			a.eseguiRitratto(this);									     //Il cliente si fa fare il ritratto
+			System.out.println("Cliente " + id + " ha completato il ritratto. ");
+			a.liberaSedia(this);									     //Dopo aver finito il cliente lascia la sedia
+			System.out.println("Cliente " + id + " lascia l'artista. ");
+		}else {												//Altrimetni il cliente rinuncia al riratto in base al tempo di attesa
+			System.out.println("Cliente " + id + " rinuncia al ritratto. ");	
+		}
+	}
+}
 ```
+
+
+- ## Classe Sedia
+
+      La classe Sedia rappresenta una sedia disponibile per i clienti. Ha un identificatore "id" che permette di distingure le sedie tra loro.
+      
+      Esempio del codice:
+      
+
+		
+		
+
     
 
